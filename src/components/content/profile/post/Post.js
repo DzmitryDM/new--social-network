@@ -6,7 +6,7 @@ import { addPostActionCreator } from "../../../../features/profile/profileSlice"
 import { Field, Formik, Form, ErrorMessage } from "formik";
 import { redirect } from "react-router-dom";
 
-const Post = React.memo((props) => {
+const Post = React.memo(() => {
 
 
 	const initial = useSelector((state) => state.profile.dialog);
