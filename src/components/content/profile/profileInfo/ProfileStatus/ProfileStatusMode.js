@@ -29,7 +29,7 @@ const ProfileStatusMode = () => {
 	const onStatusChange = (e) => {
 		setEditStatus(e.currentTarget.value);
 	};
-	const { id } = useParams();
+
 
 
 
