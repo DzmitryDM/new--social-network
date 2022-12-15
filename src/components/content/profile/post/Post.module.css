@@ -1,0 +1,40 @@
+
+
+.posts {
+   display: grid;
+
+}
+
+textarea {
+   border: 1px solid black;
+   margin-bottom: 10px;
+   border-radius: 20px;
+}
+
+button {
+
+   padding: 7px 40px 7px 40px;
+   background: rgb(250, 91, 91);
+   border-radius: 20px;
+   font-size: 20px;
+   font-weight: 600;
+   margin: 0px 0px 40px 523px;
+
+}
+
+.text {
+   font-size: 20px;
+   font-weight: 550;
+   margin-bottom: 10px;
+}
+
+.names{
+   border: 1.8px red solid;
+}
+
+.error{
+   font-size: 14px;
+   font-weight: 600;
+margin-top: 10px;
+color: rgb(247, 51, 51);
+}

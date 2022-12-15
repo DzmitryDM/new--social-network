@@ -1,0 +1,13 @@
+.wrapper{
+background-color: rgb(243, 87, 87);
+border-radius: 27px;
+}
+
+.loginBlock a{
+   color: white;
+   margin-left: 50px;
+}
+
+.exit{
+background-color: white;
+}

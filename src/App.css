@@ -1,0 +1,9 @@
+.app {
+   padding: 10px 0px;
+   margin: 0 auto;
+   max-width: 900px;
+
+   overflow: hidden;
+   display: grid;
+   grid-template-rows: minmax(60px, auto) 1fr minmax(60px, auto);
+}

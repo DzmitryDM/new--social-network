@@ -1,0 +1,29 @@
+.navbar{
+min-height: 100%;
+      padding-right: 20px;
+      background-color: rgb(243, 87, 87);
+      margin: 0px 20px 20px 0px;
+      padding: 10px 0px 0px 10px;
+      font-size: 20px;
+      border-radius: 20px;
+         
+     
+}
+
+.list{
+font-size: 25px;
+
+}
+.list li{
+   margin-bottom: 10px;
+color: black;
+}
+
+.active{
+   color: white;
+}
+.actives{
+   color: black;
+}
+
+

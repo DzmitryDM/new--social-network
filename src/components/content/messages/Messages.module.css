@@ -1,0 +1,19 @@
+.messageContainer {
+   display: grid;
+   grid-template-columns: minmax(auto,300px) minmax(auto,400px) ;
+}
+
+.users{
+   margin-right: 400px;
+}
+
+.title{
+   font-weight: 600;
+   font-size: 30px;
+   margin-bottom: 40px;
+}
+
+
+.messagess{
+   margin-bottom: 10px;
+   }

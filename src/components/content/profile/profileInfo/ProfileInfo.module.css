@@ -1,0 +1,47 @@
+.profileinfo_stena img {
+   width: 710px;
+   height: 200px;
+   margin: 0px 0px 10px 0px;
+   border-radius: 40px;
+}
+
+.profileinfo_ava img {
+   width: 110px;
+   height: 110px;
+   border-radius: 50%;
+   margin: 15px 0px 0px 0px;
+}
+
+
+.profileinfo {
+   display: grid;
+   grid-template: 1fr / 110px 350px;
+   grid-template-areas:
+      "stena stena"
+      "ava spisok";
+   margin-bottom: 20px;
+}
+
+
+.profileinfo_ava {
+   grid-area: ava;
+}
+
+
+
+.profileinfo_spisok {
+   grid-area: spisok;
+   margin: 15px 0px 0px 77px;
+   font-size: 20px;
+}
+
+
+.profileInfo_aboutMe{
+   margin-bottom: 20px;
+}
+.profileInfo_aboutMe li{
+   margin-bottom: 2px;
+}
+.profileInfo_contacts li{
+   margin-bottom: 5px;
+}

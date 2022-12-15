@@ -1,0 +1,8 @@
+.content {
+
+min-height: 100%;
+   padding: 20px 0px 0px 0px;
+   display: grid;
+   grid-template-columns: 180px 1fr;
+   margin-bottom: 20px;
+}
