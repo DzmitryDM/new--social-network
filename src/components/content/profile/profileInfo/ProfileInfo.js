@@ -3,8 +3,9 @@ import p from "./ProfileInfo.module.css";
 import serval from "./image/serval.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import Preloader from "../../../common/Preloader/Preloader";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
+   loadingPhoto,
 	setProfile,
 	setStatus,
 } from "../../../../features/profile/profileSlice";
@@ -14,29 +15,39 @@ const ProfileInfo = () => {
 	const dispatch = useDispatch();
 	const profile = useSelector((state) => state.profile.profile);
 	const userId = useSelector((state) => state.auth.id);
-
 	let { id } = useParams();
 
+      
 	useEffect(() => {
-		if (!id) {
+      		if (!id) {
 			id = userId;
 		}
 		dispatch(setProfile(id));
 		dispatch(setStatus(id));
 	}, [id, userId]);
 
+ 
 	if (!profile) {
 		return <Preloader />;
 	}
+
+const mainFotoSelected = (e) => {
+   let lod=e.target.files
+
+ dispatch(loadingPhoto(lod))
+}
+
+
 
 	return (
 		<div className={p.profileinfo}>
 			<ProfileStatusMode />
 			<div className={p.profileinfo_ava}>
 				<img
-					src={profile.photos.large != null ? profile.photos.large : serval}
+					src={profile.photos.large || serval}
 				/>
 			</div>
+         {!id && <input type="file" onChange={mainFotoSelected} />}
 
 			<div className={p.profileinfo_spisok}>
 				<ul className={p.profileInfo_aboutMe}>

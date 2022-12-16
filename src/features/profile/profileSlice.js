@@ -41,6 +41,24 @@ export const updateStatus = createAsyncThunk(
 			
 	}
 );
+export const loadingPhoto = createAsyncThunk(
+	"profile/loadingPhoto",
+	async (file, { rejectWithValue,dispatch }) => {
+      const formData= new FormData()
+      formData.append("image",file)
+		const response= await axios
+			.put('https://social-network.samuraijs.com/api/1.0/profile/photo',formData,{
+			headers:{
+            'Content-Type':'multipart/form-data'
+         }
+			},{withCredentials: true}).savePhoto(file)
+			
+				if (response.data.resultCode === 0) {
+				dispatch(setImageProfile(response.data.data.photo));
+				}
+			
+	}
+);
 
 const profileSlice = createSlice({
 	name: "profile",
@@ -71,6 +89,9 @@ const profileSlice = createSlice({
 		setStatusProfile: (state, action) => {
 			state.status = action.payload;
 		},
+		setImageProfile: (state, action) => {
+			state.photo= action.payload;
+		},
 	},
 
 });
@@ -81,5 +102,6 @@ export const {
 	setUserProfileAc,
 	setMyProfileAc,
 	setStatusProfile,
+   setImageProfile
 } = profileSlice.actions;
 export default profileSlice.reducer;

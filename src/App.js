@@ -12,12 +12,13 @@ const App = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(setInitializeApp());
-	},[]);
-
+	}, []);
+	if (!initializeApp) {
+		return <Preloader/>;
+	}
 
 	return (
 		<div className="app">
-      {!initializeApp&&<Preloader/>}      
 			<Header />
 			<Content />
 			<Footer />
