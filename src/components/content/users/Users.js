@@ -5,20 +5,14 @@ import { useEffect } from "react";
 import {
 	setUsers,
 } from "../../../features/users/userSlice";
-import {  useNavigate } from "react-router-dom";
 import Paginator from "../../common/Paginator/Paginator";
 import User from "./User";
-import UserImage from "./UserImage";
 
-// hooks
-<></>;
+
+
 const Users = () => {
 	const users = useSelector((state) => state.users.users);
 
-	const navig = useNavigate();
-	const showtr = (id) => {
-		navig("/" + id);
-	};
 
 	const dispatch = useDispatch();
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import Dialog from './dialog/Dialog'
 import m from './Messages.module.css'
 import MyMessage from './myMessage/myMessage'
@@ -10,12 +9,9 @@ import UserMessage from './usersMessage/usersMessage'
 const Messages = () => {
    let users = useSelector(state=>state.messages.dialogsUser)
    let messages = useSelector(state=>state.messages.dialogsMessages)
- const redirect=useNavigate()
 const isAuth=useSelector(state=>state.auth.isAuth)
  useEffect(()=>{
-if(!isAuth){
-   redirect('/loginForm')
-}
+
  })
 
    let user = users.map(u=><Dialog name={u.name} id={u.id}/>)

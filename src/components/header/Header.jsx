@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {  selectIsAuth, selectLogins, setAuth, setLogout } from "./../../features/auth/authSlice";
 import h from "./Header.module.css";
 

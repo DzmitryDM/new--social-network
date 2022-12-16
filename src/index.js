@@ -6,14 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 //import store from './redux/store';
 import store from './app/store';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-<BrowserRouter basename={process.env.PUBLIC_URL}>
+<BrowserRouter >
   <React.StrictMode>
 <Provider store={store}>
       <App />

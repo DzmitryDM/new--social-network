@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import c from "./Content.module.css";
 import Music from "./music/Music";
 import Navbar from "./navbar/NaVbar";
@@ -14,7 +14,6 @@ const Messages = React.lazy(() => import("./messages/Messages"));
 const Users = React.lazy(() => import("./users/Users"));
 
 const Content = () => {
-	const redirect = useNavigate();
 	const isAuth = useSelector((state) => state.auth.isAuth);
 
 	return (
