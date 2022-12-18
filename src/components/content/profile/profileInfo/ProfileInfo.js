@@ -5,11 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Preloader from "../../../common/Preloader/Preloader";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-   loadingPhoto,
+	loadingPhoto,
+	savePhotos,
 	setProfile,
 	setStatus,
 } from "../../../../features/profile/profileSlice";
 import ProfileStatusMode from "./ProfileStatus/ProfileStatusMode";
+import { savePhoto } from "../../../api/api";
 
 const ProfileInfo = () => {
 	const dispatch = useDispatch();
@@ -17,37 +19,31 @@ const ProfileInfo = () => {
 	const userId = useSelector((state) => state.auth.id);
 	let { id } = useParams();
 
-      
 	useEffect(() => {
-      		if (!id) {
+		if (!id) {
 			id = userId;
 		}
 		dispatch(setProfile(id));
 		dispatch(setStatus(id));
 	}, [id, userId]);
 
- 
 	if (!profile) {
 		return <Preloader />;
 	}
 
-const mainFotoSelected = (e) => {
-   let lod=e.target.files
-
- dispatch(loadingPhoto(lod))
-}
-
-
+	const mainFotoSelected = (e) => {
+if (e.target.files && e.target.files.length) {
+            dispatch(savePhotos(e.target.files[0]));
+        }
+	};
 
 	return (
 		<div className={p.profileinfo}>
 			<ProfileStatusMode />
 			<div className={p.profileinfo_ava}>
-				<img
-					src={profile.photos.large || serval}
-				/>
+				<img src={profile.photos.large || serval} />
 			</div>
-         {!id && <input type="file" onChange={mainFotoSelected} />}
+			{!id && <input type="file" onChange={mainFotoSelected} />}
 
 			<div className={p.profileinfo_spisok}>
 				<ul className={p.profileInfo_aboutMe}>

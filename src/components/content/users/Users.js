@@ -17,8 +17,7 @@ const Users = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
- 
-		dispatch(setUsers());
+ dispatch(setUsers());
 	}, [dispatch]);
 
 

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { instance, profileAPI } from "../../components/api/api";
 
 export const setProfile = createAsyncThunk(
 	"profile/setProfile",
@@ -9,7 +10,7 @@ export const setProfile = createAsyncThunk(
 	const response=	await axios
 
 			.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
-			
+
             
 				dispatch(setUserProfileAc(response.data));
 			
@@ -41,22 +42,31 @@ export const updateStatus = createAsyncThunk(
 			
 	}
 );
-export const loadingPhoto = createAsyncThunk(
+//export const loadingPhoto = createAsyncThunk(
+//	"profile/loadingPhoto",
+//	async (file, { dispatch }) => {
+     
+//	 let data = await profileAPI.savePhoto(file)
+
+//    if (data.resultCode === 0) {
+//        dispatch(setImageProfile(data.data.photos))
+//    }
+			
+//	}
+//);
+export const savePhotos = createAsyncThunk(
 	"profile/loadingPhoto",
-	async (file, { rejectWithValue,dispatch }) => {
-      const formData= new FormData()
-      formData.append("image",file)
-		const response= await axios
-			.put('https://social-network.samuraijs.com/api/1.0/profile/photo',formData,{
-			headers:{
-            'Content-Type':'multipart/form-data'
-         }
-			},{withCredentials: true}).savePhoto(file)
-			
-				if (response.data.resultCode === 0) {
-				dispatch(setImageProfile(response.data.data.photo));
-				}
-			
+	async (file, { dispatch }) => {
+   const formdata=new FormData()
+   formdata.append("image",file)
+      const res= await instance.put(`profile/photo`,formdata, 
+  {          headers: 
+               { 'Content-Type': 'multipart/form-data'}
+            })
+            if(res.data.resultCode===0){
+               dispatch(setImageProfile(res.data.data.photos))
+            }
+	 
 	}
 );
 
@@ -72,8 +82,6 @@ const profileSlice = createSlice({
 	},
 	profile: {},
 	status: "",
-   pro:'aaaa',
-
 	reducers: {
 		addPostActionCreator: (state, action) => {
 			let newPostMessages = {
@@ -90,7 +98,7 @@ const profileSlice = createSlice({
 			state.status = action.payload;
 		},
 		setImageProfile: (state, action) => {
-			state.photo= action.payload;
+			state.profile=action.payload
 		},
 	},
 
