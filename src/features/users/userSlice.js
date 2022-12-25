@@ -39,7 +39,7 @@ export const onPageChanged = createAsyncThunk(
 export const setUnfollow = createAsyncThunk(
 	"users/setUnfollow",
 	async (id, { rejectWithValue, dispatch }) => {
-		dispatch(toggleFollowingInProgressAc(true));
+		dispatch(toggleFollowingInProgressAc(true, id));
 		const response = await axios.delete(
 			`https://social-network.samuraijs.com/api/1.0/follow/${id}`,
 			{
@@ -53,7 +53,7 @@ export const setUnfollow = createAsyncThunk(
 		if (response.data.resultCode === 0) {
 			dispatch(unfollowAc(id));
 		}
-		dispatch(toggleFollowingInProgressAc(false));
+		dispatch(toggleFollowingInProgressAc(false, id));
 	}
 );
 
@@ -61,7 +61,7 @@ export const setUnfollow = createAsyncThunk(
 export const setFollow = createAsyncThunk(
 	"users/setFollow",
 	async (id, { rejectWithValue, dispatch }) => {
-		dispatch(toggleFollowingInProgressAc(true));
+		dispatch(toggleFollowingInProgressAc(true, id));
 		const response = await axios.post(
 			`https://social-network.samuraijs.com/api/1.0/follow/${id}`,
 			{},
@@ -76,7 +76,7 @@ export const setFollow = createAsyncThunk(
 		if (response.data.resultCode === 0) {
 			dispatch(followAc(id));
 		}
-		dispatch(toggleFollowingInProgressAc(false));
+		dispatch(toggleFollowingInProgressAc(false, id));
 	}
 );
 //======================//
@@ -123,9 +123,9 @@ const usersSlice = createSlice({
 			state.portionSize = action.payload;
 		},
 		toggleFollowingInProgressAc: (state, action) => {
-			state.followingInProgress = action.isFetching
-				? [(state.followingInProgress = action.payload)]
-				: state.followingInProgress.filter((id) => id !== action.payload);
+			//state.followingInProgress = action.payload
+				//? state.followingInProgress = action.payload
+			 state.followingInProgress.filter((id) => id !== action.payload);
 			// state.followingInProgress=action.payload
 		},
 		toggleDeleteInProgressAc: (state, action) => {
@@ -144,6 +144,6 @@ export const {
 	setUserTotalCountAc,
 	toggleIsFetchingAc,
 	toggleFollowingInProgressAc,
-   setPortionSize
+	setPortionSize,
 } = usersSlice.actions;
 export default usersSlice.reducer;

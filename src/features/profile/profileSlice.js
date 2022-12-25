@@ -42,33 +42,44 @@ export const updateStatus = createAsyncThunk(
 			
 	}
 );
-//export const loadingPhoto = createAsyncThunk(
-//	"profile/loadingPhoto",
-//	async (file, { dispatch }) => {
-     
-//	 let data = await profileAPI.savePhoto(file)
-
-//    if (data.resultCode === 0) {
-//        dispatch(setImageProfile(data.data.photos))
-//    }
-			
-//	}
-//);
-export const savePhotos = createAsyncThunk(
+export const loadingPhoto = createAsyncThunk(
 	"profile/loadingPhoto",
-	async (file, { dispatch }) => {
-   const formdata=new FormData()
-   formdata.append("image",file)
-      const res= await instance.put(`profile/photo`,formdata, 
-  {          headers: 
-               { 'Content-Type': 'multipart/form-data'}
-            })
-            if(res.data.resultCode===0){
-               dispatch(setImageProfile(res.data.data.photos))
-            }
-	 
+	async (file, { dispatch,getState }) => {
+	 let response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(setImageProfile(response.data.data.photos))
+        
+    }
+			
 	}
 );
+export const saveProfile = createAsyncThunk(
+	"profile/saveProfile",
+	async (profile, { dispatch,getState }) => {
+     const id=getState().auth.id
+	 let res = await profileAPI.saveProfile(profile)
+
+    if (res.data.resultCode === 0) {
+        dispatch(setProfile(id))
+    }
+			
+	}
+);
+//export const savePhotos = createAsyncThunk(
+//	"profile/loadingPhoto",
+//	async (file, { dispatch }) => {
+//   const formdata=new FormData()
+//   formdata.append("image",file)
+//      const res= await instance.put(`profile/photo`,formdata, 
+//  {          headers: 
+//               { 'Content-Type': 'multipart/form-data'}
+//            })
+//            if(res.data.resultCode===0){
+//               dispatch(setImageProfile(res.data.data.photos))
+//            }
+	 
+//	}
+//);
 
 const profileSlice = createSlice({
 	name: "profile",
@@ -99,6 +110,7 @@ const profileSlice = createSlice({
 		},
 		setImageProfile: (state, action) => {
 			state.profile=action.payload
+         
 		},
 	},
 

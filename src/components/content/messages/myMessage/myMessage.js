@@ -5,7 +5,7 @@ import { updateNewPostActionCreator } from "../../../../features/messages/messag
 import my from "./myMessage.module.css";
 import * as Yup from "yup";
 
-const MyMessage = (props) => {
+const MyMessage = () => {
 	let userName = useSelector((state) => state.messages.nameUsers);
 
 	return (
@@ -30,7 +30,7 @@ const MyMessageForm = () => {
 	const dispatch = useDispatch();
 	const newPostMessage = (myMessage) => {
 		dispatch(updateNewPostActionCreator(myMessage));
-	};
+	}
 
 	return (
 		<div>

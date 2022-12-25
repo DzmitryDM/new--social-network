@@ -3,4 +3,8 @@ input{
    border-radius: 7px;
 }
 
+.captchas{
+min-width: 900px;
+}
+
 

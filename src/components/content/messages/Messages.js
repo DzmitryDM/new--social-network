@@ -14,8 +14,8 @@ const isAuth=useSelector(state=>state.auth.isAuth)
 
  })
 
-   let user = users.map(u=><Dialog name={u.name} id={u.id}/>)
-   let message = messages.map(u=><UserMessage message={u.message} id={u.id}/>)
+   let user = users.map(u=><Dialog key={u} name={u.name} id={u.id}/>)
+   let message = messages.map(u=><UserMessage key={u} message={u.message} id={u.id}/>)
 
   return (
     <div className={m.messages}>

@@ -2,15 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import u from "./Users.module.css";
 import caracal from "./image/caracal.jpg";
-import {
-	setUnfollow,
-	setFollow,
-} from "../../../features/users/userSlice";
+import { setUnfollow, setFollow } from "../../../features/users/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const User = ({ user }) => {
 	const followingInProgress = useSelector(
-		(state) => state.users.followingInProgress);
+		(state) => state.users.followingInProgress
+	);
 
 	const dispatch = useDispatch();
 
@@ -18,31 +16,40 @@ const User = ({ user }) => {
 	const linkToProfile = (id) => {
 		navigate("/" + id);
 	};
+
+	const followw = (id) => {
+		dispatch(setFollow(id));
+	};
+	const unFolloww = (id) => {
+		dispatch(setUnfollow(id));
+	};
+
 	return (
 		<div className={u.container}>
 			<div className={u.users}>
 				<div className={u.img_container}>
-					{<img
-						onClick={() => {
-							linkToProfile(user.id);
-						}}
-						src={user.photos.small != null ? user.photos.small : caracal}
-						alt=""
-					/>}
-                
+					{
+						<img
+							onClick={() => {
+								linkToProfile(user.id);
+							}}
+							src={user.photos.small != null ? user.photos.small : caracal}
+							alt=""
+						/>
+					}
 
 					<div className={u.follows}>
 						{user.followed ? (
 							<button
 								disabled={followingInProgress.some((id) => id === user.id)}
-								onClick={() => dispatch(setUnfollow(user.id))}
+								onClick={() => unFolloww(user.id)}
 							>
 								Unfollow
 							</button>
 						) : (
 							<button
 								disabled={followingInProgress.some((id) => id === user.id)}
-								onClick={() => dispatch(setFollow(user.id))}
+								onClick={() => followw(user.id)}
 							>
 								Follow
 							</button>

@@ -21,6 +21,24 @@ export const profileAPI = {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        }).then(res => res.data);
+        })
+    },
+    saveProfile(profile) {
+        return instance.put(`profile`, profile)
+        
     }
 }
+
+export const securityAPI={
+getCaptchaUrll(){
+return instance.get('security/get-captcha-url')
+}
+
+}
+
+
+//export const securityAPI = {
+  //  getCaptchaUrl() {
+  //      return instance.get(`security/get-captcha-url`).then(res => res.data);
+   // }
+//}

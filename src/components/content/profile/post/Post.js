@@ -6,12 +6,12 @@ import { addPostActionCreator } from "../../../../features/profile/profileSlice"
 import { Field, Formik, Form, ErrorMessage } from "formik";
 import { redirect } from "react-router-dom";
 
-const Post = React.memo(() => {
+const Post = () => {
 
 
 	const initial = useSelector((state) => state.profile.dialog);
 
-const postMessage= initial.map((i=><Messages message={i.message} id={i.id}/>))
+const postMessage= initial.map((i=><Messages key={i.id} message={i.message} id={i.id}/>))
 
 	return (
 		<div className={p.posts}>
@@ -20,7 +20,7 @@ const postMessage= initial.map((i=><Messages message={i.message} id={i.id}/>))
 			<div className={p.messages}>{postMessage}</div>
 		</div>
 	);
-});
+};
 
 const validateOnPostChange = (values) => {
 	const errors = {};

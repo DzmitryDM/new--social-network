@@ -49,7 +49,7 @@ const Content = () => {
 				<Route path="/settings" element={<Settings />} />
 
 				<Route path="/loginForm" element={<LoginForm />} />
-			</Routes>
+            			</Routes>
 		</div>
 	);
 };

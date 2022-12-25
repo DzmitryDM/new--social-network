@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { securityAPI } from "../../components/api/api";
 
 export const setAuth = createAsyncThunk(
 	"auth/setAuth",
@@ -23,15 +24,18 @@ export const setAuth = createAsyncThunk(
 
 export const setLogin = createAsyncThunk(
 	"auth/setAuthLogin",
-	async ({ email, password, rememberMe }, { dispatch }) => {
+	async ({ email, password, rememberMe,captcha }, { dispatch }) => {
 		const response = await axios.post(
 			"https://social-network.samuraijs.com/api/1.0/auth/login",
-			{ email, password, rememberMe },
+			{ email, password, rememberMe, captcha},
 			{ withCredentials: true }
 		);
+    
 		if (response.data.resultCode === 0) {
 			dispatch(setAuth());
-		}
+		}else if(response.data.resultCode===10){
+         dispatch(getCaptchaUrl())
+      }
 	}
 );
 
@@ -50,12 +54,21 @@ export const setLogout = createAsyncThunk(
 
 	}
 );
+export const getCaptchaUrl = createAsyncThunk(
+	"auth/getCaptchaUrl",
+	async (_, { dispatch }) => {
+	const response =	await securityAPI.getCaptchaUrll()
+const captchaUrl= response.data.url
+dispatch(setCaptchaUrl(captchaUrl))
+	}
+);
 
 const initialState = {
 	login: null,
 	email: null,
 	id: null,
 	isAuth: false,
+   captchaUrl:null
 };
 
 const authSlice = createSlice({
@@ -80,6 +93,10 @@ const authSlice = createSlice({
 		
 			state.isAuth=true
 		},
+		setCaptchaUrl: (state,action) => {
+		
+			state.captchaUrl =action.payload
+		},
 	}
 });
 
@@ -88,7 +105,7 @@ export const {
 	setUserEmailAc,
 	setUserLoginAc,
 	setUserIsAuthAc,
-	
+	setCaptchaUrl
 } = authSlice.actions;
 
 export default authSlice.reducer;
